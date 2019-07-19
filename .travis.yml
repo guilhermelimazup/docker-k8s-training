@@ -6,3 +6,16 @@ before_install:
 
 script:
   - docker run -e CI=true guilhermecl/docker-k8s-training npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-kubernetes-training"
+  env: "DockerKubernetesTraining-env"
+  bucket: "elasticbeanstalk-us-east-2-322423115285"
+  bucket_path: "docker-kubernetes-training"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: "$AWS_SECRET_KEY"
